@@ -19,7 +19,7 @@ function moveButton() {
     
     // Ubah posisi jadi absolute HANYA saat mouse mendekat
     // Ini kuncinya supaya awal-awal dia gak numpuk
-    noButton.style.position = "absolute";
+    noButton.style.position = "fixed";
 
     var x = Math.random() * (window.innerWidth - noButton.offsetWidth);
     var y = Math.random() * (window.innerHeight - noButton.offsetHeight);
