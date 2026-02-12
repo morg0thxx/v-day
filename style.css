@@ -1,47 +1,42 @@
-/* style.css */
+/* Copy semua ini ke style.css */
 body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Gunakan min-height untuk memastikan selalu penuh */
+    height: 100vh;
     margin: 0;
     background-color: #fce4ec;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    overflow: hidden; /* Mencegah scrollbar muncul saat tombol 'Nggak!' bergerak */
+    overflow: hidden; 
 }
 
 .container {
     text-align: center;
-    position: relative; /* Penting agar posisi absolut relatif terhadap ini */
-    z-index: 1;
+    width: 100%;
+    position: relative;
 }
 
 .gif_container img {
-    max-width: 200px; /* Ukuran GIF disesuaikan sedikit */
+    max-width: 200px;
     height: auto;
-    margin-bottom: 20px;
 }
 
 h1 {
     color: #d81b60;
-    font-size: 2em;
     margin-bottom: 10px;
 }
 
 p {
     color: #880e4f;
-    font-size: 1.1em;
     margin-bottom: 30px;
 }
 
-/* Flexbox untuk menyejajarkan tombol ke kanan dan kiri */
+/* INI YANG BIKIN TOMBOL RAPI KE SAMPING */
 .buttons {
     display: flex;
-    gap: 20px;
     justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-    flex-wrap: wrap;
+    gap: 20px; /* Jarak antar tombol */
+    width: 100%;
 }
 
 .btn {
@@ -51,45 +46,17 @@ p {
     border: none;
     border-radius: 25px;
     cursor: pointer;
-    transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: relative; 
+    z-index: 10;
 }
 
 #yesButton {
-    background: linear-gradient(135deg, #4CAF50, #45a049);
+    background-color: #ff4081;
     color: white;
-    border: none;
-    border-radius: 16px;
-    font-size: 1.6rem;
-    font-weight: 900;
-    font-family: 'Nunito', sans-serif;
-    padding: 18px 45px;
-    cursor: pointer;
-    transition: transform 0.15s, box-shadow 0.15s;
-    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.45);
-    letter-spacing: 1px;
-}
-
-#yesButton:hover {
-    background-color: #f50057;
-    transform: scale(1.05);
 }
 
 #noButton {
-    background: linear-gradient(135deg, #e74c3c, #c0392b);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: 700;
-    font-family: 'Nunito', sans-serif;
-    padding: 12px 28px;
-    cursor: pointer;
-    transition: background 0.2s, left 0.25s ease, top 0.25s ease;
-    box-shadow: 0 4px 14px rgba(231, 76, 60, 0.4);
-}
-
-/* Tambahkan kelas ini lewat JS saat tombol 'Nggak!' mulai bergerak */
-#noButton.moving {
-    position: absolute;
+    background-color: #bdbdbd;
+    color: #424242;
 }
