@@ -37,37 +37,53 @@ p {
 /* Flexbox untuk menyejajarkan tombol ke kanan dan kiri */
 .buttons {
     display: flex;
-    justify-content: center; /* Pusatkan kedua tombol secara horizontal */
-    gap: 20px; /* Jarak antar tombol */
-    margin-top: 20px;
-    position: relative; /* Penting untuk konteks posisi absolut */
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    flex-wrap: wrap;
 }
 
-.btn {
-    padding: 12px 25px;
-    font-size: 1em;
-    font-weight: bold;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-#yesButton {
-    background-color: #ff4081;
+#yes-btn {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
     color: white;
+    border: none;
+    border-radius: 16px;
+    font-size: 1.6rem;
+    font-weight: 900;
+    font-family: 'Nunito', sans-serif;
+    padding: 18px 45px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.45);
+    letter-spacing: 1px;
 }
 
-#yesButton:hover {
-    background-color: #f50057;
-    transform: scale(1.05);
+#yes-btn:hover {
+    transform: scale(1.06) translateY(-2px);
+    box-shadow: 0 10px 28px rgba(76, 175, 80, 0.55);
 }
 
-#noButton {
-    background-color: #bdbdbd;
-    color: #424242;
-    /* HAPUS position: absolute dari sini agar awalnya sejajar */
+#yes-btn:active {
+    transform: scale(0.98);
+}
+
+#no-btn {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+    padding: 12px 28px;
+    cursor: pointer;
+    transition: background 0.2s, left 0.25s ease, top 0.25s ease;
+    box-shadow: 0 4px 14px rgba(231, 76, 60, 0.4);
+}
+
+#no-btn:hover {
+    background: linear-gradient(135deg, #c0392b, #a93226);
 }
 
 /* Tambahkan kelas ini lewat JS saat tombol 'Nggak!' mulai bergerak */
