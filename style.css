@@ -111,7 +111,3 @@ p {
 #noButton.moving {
     position: absolute;
 }
-/* Tambahkan kelas ini lewat JS saat tombol 'Nggak!' mulai bergerak */
-#noButton.moving {
-    position: absolute;
-}
