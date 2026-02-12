@@ -3,92 +3,45 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Gunakan min-height untuk memastikan selalu penuh */
+    height: 100vh;
     margin: 0;
-    background-color: #fce4ec;
+    background-color: #fce4ec; /* Pink muda yang tenang */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    overflow: hidden; /* Mencegah scrollbar muncul saat tombol 'Nggak!' bergerak */
 }
 
 .container {
     text-align: center;
-    position: relative; /* Penting agar posisi absolut relatif terhadap ini */
-    z-index: 1;
 }
 
 .gif_container img {
-    max-width: 200px; /* Ukuran GIF disesuaikan sedikit */
-    height: auto;
+    max-width: 250px;
     margin-bottom: 20px;
 }
 
 h1 {
     color: #d81b60;
-    font-size: 2em;
-    margin-bottom: 10px;
+    font-size: 2.5em;
 }
 
 p {
     color: #880e4f;
-    font-size: 1.1em;
-    margin-bottom: 30px;
+    font-size: 1.2em;
 }
 
-/* Flexbox untuk menyejajarkan tombol ke kanan dan kiri */
-/* style.css */
-body {
+.buttons {
+    margin-top: 30px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Gunakan min-height untuk memastikan selalu penuh */
-    margin: 0;
-    background-color: #fce4ec;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    overflow: hidden; /* Mencegah scrollbar muncul saat tombol 'Nggak!' bergerak */
-}
-
-.container {
-    text-align: center;
-    position: relative; /* Penting agar posisi absolut relatif terhadap ini */
-    z-index: 1;
-}
-
-.gif_container img {
-    max-width: 200px; /* Ukuran GIF disesuaikan sedikit */
-    height: auto;
-    margin-bottom: 20px;
-}
-
-h1 {
-    color: #d81b60;
-    font-size: 2em;
-    margin-bottom: 10px;
-}
-
-p {
-    color: #880e4f;
-    font-size: 1.1em;
-    margin-bottom: 30px;
-}
-
-/* Flexbox untuk menyejajarkan tombol ke kanan dan kiri */
-.buttons {
-    display: flex;
-    justify-content: center; /* Pusatkan kedua tombol secara horizontal */
-    gap: 20px; /* Jarak antar tombol */
-    margin-top: 20px;
-    position: relative; /* Penting untuk konteks posisi absolut */
+    gap: 20px;
 }
 
 .btn {
-    padding: 12px 25px;
-    font-size: 1em;
-    font-weight: bold;
+    padding: 15px 30px;
+    font-size: 1.2em;
     border: none;
-    border-radius: 25px;
+    border-radius: 50px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: 0.3s;
 }
 
 #yesButton {
@@ -96,18 +49,8 @@ p {
     color: white;
 }
 
-#yesButton:hover {
-    background-color: #f50057;
-    transform: scale(1.05);
-}
-
 #noButton {
-    background-color: #bdbdbd;
-    color: #424242;
-    /* HAPUS position: absolute dari sini agar awalnya sejajar */
-}
-
-/* Tambahkan kelas ini lewat JS saat tombol 'Nggak!' mulai bergerak */
-#noButton.moving {
-    position: absolute;
+    background-color: #9e9e9e;
+    color: white;
+    position: absolute; /* Penting untuk efek lari */
 }
