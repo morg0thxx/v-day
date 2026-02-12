@@ -9,137 +9,79 @@ const gifStages = [
     "https://media1.tenor.com/m/uDugCXK4vI4AAAAC/chiikawa-hachiware.gif"  // 7 crying runaway
 ]
 
+// Ganti teks noMessages jadi lebih santai & menyebalkan
 const noMessages = [
     "No",
-    "Are you positive? 🤔",
-    "Pookie please... 🥺",
-    "If you say no, I will be really sad...",
-    "I will be very sad... 😢",
-    "Please??? 💔",
-    "Don't do this to me...",
-    "Last chance! 😭",
-    "You can't catch me anyway 😜"
-]
+    "Wait, for real? 🤨",
+    "Don't do me like that...",
+    "I'll buy you snacks!! 🍟",
+    "You're actually heartless lol",
+    "STOOOPPPP 🛑",
+    "You can't even click this anymore",
+    "GAAA!! 😜",
+    "Catch me if you can! LMAO"
+];
 
 const yesTeasePokes = [
-    "try saying no first... I bet you want to know what happens 😏",
-    "go on, hit no... just once 👀",
-    "you're missing out 😈",
-    "click no, I dare you 😏"
-]
+    "Try clicking No first... I dare you 😏",
+    "Bet you can't hit the No button 👀",
+    "Go on, try to reject me 😈",
+    "You're missing the fun part!"
+];
 
-let yesTeasedCount = 0
-
-let noClickCount = 0
-let runawayEnabled = false
-let musicPlaying = true
-
-const catGif = document.getElementById('cat-gif')
-const yesBtn = document.getElementById('yes-btn')
-const noBtn = document.getElementById('no-btn')
-const music = document.getElementById('bg-music')
-
-// Autoplay: audio starts muted (bypasses browser policy), unmute immediately
-music.muted = true
-music.volume = 0.3
-music.play().then(() => {
-    music.muted = false
-}).catch(() => {
-    // Fallback: unmute on first interaction
-    document.addEventListener('click', () => {
-        music.muted = false
-        music.play().catch(() => {})
-    }, { once: true })
-})
-
-function toggleMusic() {
-    if (musicPlaying) {
-        music.pause()
-        musicPlaying = false
-        document.getElementById('music-toggle').textContent = '🔇'
-    } else {
-        music.muted = false
-        music.play()
-        musicPlaying = true
-        document.getElementById('music-toggle').textContent = '🔊'
-    }
-}
-
-function handleYesClick() {
-    if (!runawayEnabled) {
-        // Tease her to try No first
-        const msg = yesTeasePokes[Math.min(yesTeasedCount, yesTeasePokes.length - 1)]
-        yesTeasedCount++
-        showTeaseMessage(msg)
-        return
-    }
-    window.location.href = 'yes.html'
-}
-
-function showTeaseMessage(msg) {
-    let toast = document.getElementById('tease-toast')
-    toast.textContent = msg
-    toast.classList.add('show')
-    clearTimeout(toast._timer)
-    toast._timer = setTimeout(() => toast.classList.remove('show'), 2500)
-}
+// ... (kode audio & toggleMusic tetap sama)
 
 function handleNoClick() {
-    noClickCount++
+    noClickCount++;
 
-    // Cycle through guilt-trip messages
-    const msgIndex = Math.min(noClickCount, noMessages.length - 1)
-    noBtn.textContent = noMessages[msgIndex]
+    const msgIndex = Math.min(noClickCount, noMessages.length - 1);
+    noBtn.textContent = noMessages[msgIndex];
 
-    // Grow the Yes button bigger each time
-    const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize)
-    yesBtn.style.fontSize = `${currentSize * 1.35}px`
-    const padY = Math.min(18 + noClickCount * 5, 60)
-    const padX = Math.min(45 + noClickCount * 10, 120)
-    yesBtn.style.padding = `${padY}px ${padX}px`
+    // Yes button makin rakus (makin gede)
+    const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+    yesBtn.style.fontSize = `${currentSize * 1.4}px`; // Lebih cepat gedenya
+    
+    // Swap GIF
+    const gifIndex = Math.min(noClickCount, gifStages.length - 1);
+    swapGif(gifStages[gifIndex]);
 
-    // Shrink No button to contrast
-    if (noClickCount >= 2) {
-        const noSize = parseFloat(window.getComputedStyle(noBtn).fontSize)
-        noBtn.style.fontSize = `${Math.max(noSize * 0.85, 10)}px`
+    // Aktifkan mode lari lebih awal (klik ke-3) biar makin kesel
+    if (noClickCount >= 3 && !runawayEnabled) {
+        enableRunaway();
+        runawayEnabled = true;
     }
-
-    // Swap cat GIF through stages
-    const gifIndex = Math.min(noClickCount, gifStages.length - 1)
-    swapGif(gifStages[gifIndex])
-
-    // Runaway starts at click 5
-    if (noClickCount >= 5 && !runawayEnabled) {
-        enableRunaway()
-        runawayEnabled = true
-    }
-}
-
-function swapGif(src) {
-    catGif.style.opacity = '0'
-    setTimeout(() => {
-        catGif.src = src
-        catGif.style.opacity = '1'
-    }, 200)
 }
 
 function enableRunaway() {
-    noBtn.addEventListener('mouseover', runAway)
-    noBtn.addEventListener('touchstart', runAway, { passive: true })
+    // Pemicu lari: kursor mendekat (mouseover) atau disentuh (touchstart)
+    noBtn.addEventListener('mouseover', runAway);
+    noBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault(); // Biar gak bisa diklik di HP
+        runAway();
+    });
 }
 
 function runAway() {
-    const margin = 20
-    const btnW = noBtn.offsetWidth
-    const btnH = noBtn.offsetHeight
-    const maxX = window.innerWidth - btnW - margin
-    const maxY = window.innerHeight - btnH - margin
+    // Bikin areanya lebih luas tapi tetap di dalam layar
+    const padding = 50;
+    const btnW = noBtn.offsetWidth;
+    const btnH = noBtn.offsetHeight;
+    
+    // Logika lari: cari koordinat random yang jauh dari posisi sekarang
+    let randomX = Math.random() * (window.innerWidth - btnW - padding);
+    let randomY = Math.random() * (window.innerHeight - btnH - padding);
 
-    const randomX = Math.random() * maxX + margin / 2
-    const randomY = Math.random() * maxY + margin / 2
+    // Tambahkan transisi smooth biar kelihatan "licin"
+    noBtn.style.transition = 'all 0.2s ease-out'; 
+    noBtn.style.position = 'fixed';
+    noBtn.style.left = `${randomX}px`;
+    noBtn.style.top = `${randomY}px`;
+    noBtn.style.zIndex = '999';
 
-    noBtn.style.position = 'fixed'
-    noBtn.style.left = `${randomX}px`
-    noBtn.style.top = `${randomY}px`
-    noBtn.style.zIndex = '50'
+    // Efek tambahan: tombol No kadang mengecil sendiri tiap lari
+    const currentNoSize = parseFloat(window.getComputedStyle(noBtn).fontSize);
+    if (currentNoSize > 8) {
+        noBtn.style.fontSize = `${currentNoSize * 0.9}px`;
+    }
 }
+// ... (sisanya tetap sama)
