@@ -9,15 +9,21 @@ const gifStages = [
     "https://media1.tenor.com/m/uDugCXK4vI4AAAAC/chiikawa-hachiware.gif"  // 7 crying runaway
 ]
 
-// script.js
+/* Copy semua ini ke script.js */
 function nextPage() {
     window.location.href = "yes.html";
 }
 
 function moveButton() {
-    var x = Math.random() * (window.innerWidth - document.getElementById('noButton').offsetWidth);
-    var y = Math.random() * (window.innerHeight - document.getElementById('noButton').offsetHeight);
+    var noButton = document.getElementById('noButton');
     
-    document.getElementById('noButton').style.left = x + "px";
-    document.getElementById('noButton').style.top = y + "px";
+    // Ubah posisi jadi absolute HANYA saat mouse mendekat
+    // Ini kuncinya supaya awal-awal dia gak numpuk
+    noButton.style.position = "absolute";
+
+    var x = Math.random() * (window.innerWidth - noButton.offsetWidth);
+    var y = Math.random() * (window.innerHeight - noButton.offsetHeight);
+
+    noButton.style.left = x + "px";
+    noButton.style.top = y + "px";
 }
